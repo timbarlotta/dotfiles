@@ -4,6 +4,8 @@
 # Folder view configuration files
 .DS_Store
 Desktop.ini
+.AppleDouble
+.LSOverride
 
 # Thumbnail cache files
 ._*
@@ -12,3 +14,22 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+.VolumeIcon.icns
+.TemporaryItems
+.DocumentRevisions-V100
+.fseventsd
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Intellij Created 
+*.iml
+.idea/
+*.ipr
+*.iws
+/out/
+
