@@ -146,3 +146,10 @@ alias reload="exec ${SHELL} -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# Tim Barlotta additions
+alias java_info='/usr/libexec/java_home -V 2>&1'
+alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home | sort | uniq'
+alias port_info='lsof -i -n -P'
+alias ll="ls -lahL"
+alias con="tail -40 -f /var/log/system.log"
