@@ -4,7 +4,7 @@
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
 	# View the current working tree status using the short format.
-	s = status -s
+	#s = status -s
 
 	# Show the diff between the latest commit and the current state.
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -33,7 +33,7 @@
 	aliases = config --get-regexp alias
 
 	# Amend the currently staged files to the latest commit.
-	amend = commit --amend --reuse-message=HEAD
+	#amend = commit --amend --reuse-message=HEAD
 
 	# Credit an author on the latest commit.
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
@@ -65,6 +65,58 @@
 
 	# Show the user email for the current repository.
 	whoami = config user.email
+
+    # Tim Barlotta added
+    # edit global git config
+	ec = config --global -e
+
+	# View the current working tree status using the short format
+    st = status -s
+
+    # checkout a branch
+	co = checkout
+
+	# checkout and create a branch
+	cob = checkout -b
+
+	# get the latest changes
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+
+    # stage and commit all with a message
+	cm = !git add -A && git commit -m
+
+	# make a savepoint
+	save = !git add -A && git commit -m 'SAVEPOINT'
+
+    # make a work in progress point
+	wip = commit -am "WIP"
+
+	# undo the last commit
+	undo = reset HEAD~1 --mixed
+
+	# amend the last commit
+	amend = commit -a --amend
+
+    # create a savepoint and then reset back
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+    # output last log message
+    last = log -1 HEAD
+
+    # unstage files
+    unstage = reset HEAD --
+
+    # stash all files
+	shelf = !git add -A && git stash
+
+    # pop from stash
+    unshelf = stash pop
+
+    # clean up merged branches
+    bclean = "!f() { branches=$(git branch --merged ${1-master} | grep -v " ${1-master}$"); [ -z \"$branches\" ] || git branch -d $branches; }; f"
+
+    # clean up branches merged to master or a specified branch
+	bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 
 [apply]
 
@@ -127,7 +179,7 @@
 [commit]
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = true
+	# gpgsign = true
 
 [diff]
 
@@ -156,6 +208,14 @@
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
+[pull]
+
+	rebase = true
+
+[fetch]
+
+	prune = true
+
 # URL shorthands
 
 [url "git@github.com:"]
@@ -181,3 +241,7 @@
 [init]
 
 	defaultBranch = main
+
+[credential]
+
+	helper = osxkeychain
