@@ -829,13 +829,6 @@ defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault
 cp -r init/Preferences.sublime-settings "${HOME}/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings" 2> /dev/null
 
 ###############################################################################
-# Tweetbot.app                                                                #
-###############################################################################
-
-# Bypass the annoyingly slow t.co URL shortener
-defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
-
-###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
