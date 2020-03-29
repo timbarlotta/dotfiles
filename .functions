@@ -169,3 +169,10 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# switch java version
+function java_use()  {
+	export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+	java -version
+}
+
